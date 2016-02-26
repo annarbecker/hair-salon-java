@@ -35,8 +35,8 @@ public class AppTest extends FluentTest {
   public void clientIsDisplayed() {
     Stylist myStylist = new Stylist("Jane");
     myStylist.save();
-    String stylistPath = String.format("http://localhost:4567/stylists/%d", myStylist.getId());
     Client newClient = new Client("Anne", myStylist.getId());
+    String stylistPath = String.format("http://localhost:4567/stylists/%d", myStylist.getId());
     newClient.save();
     goTo(stylistPath);
     assertThat(pageSource().contains("Anne"));
@@ -55,28 +55,25 @@ public class AppTest extends FluentTest {
       public void deleteClient() {
         Stylist myStylist = new Stylist("Jamie");
         myStylist.save();
-        String stylistPath = String.format("http://localhost:4567/stylists/%d", myStylist.getId());
         Client myClient = new Client("Sue", myStylist.getId());
+        String stylistPath = String.format("http://localhost:4567/stylists/%d", myStylist.getId());
         myClient.save();
         myClient.delete();
         goTo(stylistPath);
         submit(".delete");
         assertThat(!(pageSource()).contains("Sue"));
       }
-    //
-    // @Test
-    // public void updateClientForm_ChangesName() {
-    //   Stylist stylist = new Stylist("Grace", "Hopper");
-    //   stylist.save();
-    //   Client client = new Client("Richard", "Roe");
-    //   client.save();
-    //   client.assignStylist(stylist.getId());
-    //   goTo("http://localhost:4567/clients/" +
-    //     Integer.toString(client.getId()));
-    //   fill("#newfirstname").with("Larry");
-    //   fill("#newlastname").with("Loe");
-    //   submit(".btn", withText("Update Name"));
-    //   assertThat(!(pageSource()).contains("Richard Roe"));
-    //   assertThat(pageSource()).contains("Larry Loe");
-    // }
+
+    @Test
+    public void updateClient() {
+      Stylist myStylist = new Stylist("Jamie");
+      myStylist.save();
+      Client client = new Client("Sue", myStylist.getId());
+      client.save();
+      String clientPath = String.format("http://localhost:4567/add-clients/%d/update", client.getId());
+      goTo(clientPath);
+      fill("#updateName").with("Mike");
+      submit("#updateBtn");
+      assertThat(pageSource()).contains("Mike");
+    }
 }
