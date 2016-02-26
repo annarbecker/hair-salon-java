@@ -24,9 +24,24 @@ $ postgres
 Open a new tab in terminal and create the `hair_salon` database:
 ```
 $ psql
+```
+
+In psql run:
+```
 # CREATE DATABASE hair_salon;
+```
+
+In terminal run:
+```
 $ psql hair_salon < hair_salon.sql
 ```
+
+Switch to psql and run:
+```
+# \c hair_salon
+# \dt
+```
+This will list all of the tables in the `hair_salon` database
 
 Navigate back to the directory where this repository has been cloned and run gradle:
 ```
