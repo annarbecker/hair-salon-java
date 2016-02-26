@@ -62,4 +62,17 @@ public class StylistTest {
     myStylist.delete();
     assertEquals(0, Stylist.all().size());
   }
+
+  @Test
+  public void deleteClients_deletesClientsFromDBwhenTheirStylistIsDeleted() {
+    Stylist myStylist = new Stylist("Jamie");
+    myStylist.save();
+    Client firstClient = new Client("Sue", myStylist.getId());
+    firstClient.save();
+    Client secondClient = new Client("Jane", myStylist.getId());
+    secondClient.save();
+    myStylist.deleteClients();
+    myStylist.delete();
+    assertEquals(0, Client.all().size());
+  }
 }
