@@ -1,0 +1,49 @@
+.jumbotron {
+  text-align: center;
+  background-color: #71EEB8;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#header {
+  font-family: 'Lobster', cursive;
+  font-size: 120px;
+  color: white;
+}
+
+.jumbotron a {
+  color: #346E55;
+  font-weight: lighter;
+  text-decoration: none;
+}
+
+.jumbotron p {
+  font-weight: lighter;
+}
+
+.jumbotron a:hover {
+  color: white;
+  text-decoration: none;
+  font-weight: lighter;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  background-image: url("../images/swirl_pattern.png");
+}
+
+.container {
+  background-color: white;
+  border-radius: 5px;
+  padding: 30px;
+  width: 75%;
+}
+
+a {
+  color: #346E55;
+}
+
+a:hover {
+  color: #53AE87;
+}

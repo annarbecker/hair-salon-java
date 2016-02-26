@@ -4,7 +4,6 @@ import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
 
-
 public class App {
   public static void main(String[] args) {
     staticFileLocation("/public");
@@ -103,6 +102,5 @@ public class App {
       model.put("template", "templates/updatedClient.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-
   }
 }

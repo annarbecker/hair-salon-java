@@ -43,13 +43,13 @@ public class AppTest extends FluentTest {
   }
 
   @Test
-    public void deleteStylist() {
-      Stylist myStylist = new Stylist("Jamie");
-      myStylist.save();
-      goTo("http://localhost:4567/");
-      click(".delete", withText("Delete"));
-      assertThat(!(pageSource()).contains("Jamie"));
-    }
+  public void deleteStylist() {
+    Stylist myStylist = new Stylist("Jamie");
+    myStylist.save();
+    goTo("http://localhost:4567/");
+    click(".delete", withText("Delete"));
+    assertThat(!(pageSource()).contains("Jamie"));
+  }
 
   @Test
   public void deleteClient() {
