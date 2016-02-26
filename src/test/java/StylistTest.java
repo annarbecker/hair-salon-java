@@ -45,4 +45,13 @@ public class StylistTest {
     Client[] clientList = new Client[] {firstClient, secondClient};
     assertTrue(myStylist.getClients().containsAll(Arrays.asList(clientList)));
   }
+
+  @Test
+  public void update_updateStylistName_newName() {
+    Stylist myStylist = new Stylist("Jamie");
+    myStylist.save();
+    String newName = "Tina";
+    myStylist.update(newName);
+    assertTrue(myStylist.getName().equals(newName));
+  }
 }
