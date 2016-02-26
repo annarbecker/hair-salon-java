@@ -11,6 +11,8 @@ public class Client {
   public Client(String name, int stylistId, String date, String time) {
     this.name = name;
     this.stylistId = stylistId;
+    this.date = date;
+    this.time = time;
   }
 
   public String getName() {
