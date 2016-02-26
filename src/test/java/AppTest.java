@@ -51,40 +51,60 @@ public class AppTest extends FluentTest {
       assertThat(!(pageSource()).contains("Jamie"));
     }
 
-    @Test
-      public void deleteClient() {
-        Stylist myStylist = new Stylist("Jamie");
-        myStylist.save();
-        Client myClient = new Client("Sue", myStylist.getId());
-        String stylistPath = String.format("http://localhost:4567/stylists/%d", myStylist.getId());
-        myClient.save();
-        myClient.delete();
-        goTo(stylistPath);
-        submit(".delete");
-        assertThat(!(pageSource()).contains("Sue"));
-      }
+  @Test
+  public void deleteClient() {
+    Stylist myStylist = new Stylist("Jamie");
+    myStylist.save();
+    Client myClient = new Client("Sue", myStylist.getId());
+    String stylistPath = String.format("http://localhost:4567/stylists/%d", myStylist.getId());
+    myClient.save();
+    myClient.delete();
+    goTo(stylistPath);
+    submit(".delete");
+    assertThat(!(pageSource()).contains("Sue"));
+  }
 
-      @Test
-      public void updateStylist() {
-        Stylist myStylist = new Stylist("Jamie");
-        myStylist.save();
-        String stylistPath = String.format("http://localhost:4567/stylists/%d/update", myStylist.getId());
-        goTo(stylistPath);
-        fill("#updateName").with("John");
-        submit("#updateBtn");
-        assertThat(pageSource()).contains("John");
-      }
+  @Test
+  public void updateStylist() {
+    Stylist myStylist = new Stylist("Jamie");
+    myStylist.save();
+    String stylistPath = String.format("http://localhost:4567/stylists/%d/update", myStylist.getId());
+    goTo(stylistPath);
+    fill("#updateName").with("John");
+    submit("#updateBtn");
+    assertThat(pageSource()).contains("John");
+  }
 
-    @Test
-    public void updateClient() {
-      Stylist myStylist = new Stylist("Jamie");
-      myStylist.save();
-      Client client = new Client("Sue", myStylist.getId());
-      client.save();
-      String clientPath = String.format("http://localhost:4567/add-clients/%d/update", client.getId());
-      goTo(clientPath);
-      fill("#updateName").with("Mike");
-      submit("#updateBtn");
-      assertThat(pageSource()).contains("Mike");
-    }
+  @Test
+  public void updateClient() {
+    Stylist myStylist = new Stylist("Jamie");
+    myStylist.save();
+    Client client = new Client("Sue", myStylist.getId());
+    client.save();
+    String clientPath = String.format("http://localhost:4567/add-clients/%d/update", client.getId());
+    goTo(clientPath);
+    fill("#updateName").with("Mike");
+    submit("#updateBtn");
+    assertThat(pageSource()).contains("Mike");
+  }
+
+  @Test
+  public void stylistIsDeleted() {
+    Stylist myStylist = new Stylist("Jamie");
+    myStylist.save();
+    String stylistPath = String.format("http://localhost:4567/stylists/%d/delete", myStylist.getId());
+    goTo(stylistPath);
+    assertThat((pageSource()).contains("deleted"));
+  }
+
+  @Test
+  public void clientIsDeleted() {
+    Stylist myStylist = new Stylist("Jamie");
+    myStylist.save();
+    Client client = new Client("Sue", myStylist.getId());
+    client.save();
+    String clientPath = String.format("http://localhost:4567/add-clients/%d/delete", client.getId());
+    goTo(clientPath);
+    assertThat((pageSource()).contains("deleted"));
+  }
 }
