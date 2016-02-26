@@ -5,7 +5,15 @@
     <form class="form-group" action="/add-clients/$client.getId()/updated" method="post">
       <div class="form-group">
         <label for="update">Update Client Name</label>
-        <input id="updateName" type="text" name="update" class="form-control" placeholder="update first name, last name" required>
+        <input id="updateName" type="text" name="update" class="form-control" placeholder="first name, last name" required>
+      </div>
+      <div class="form-group">
+        <label for="updateApptDate">Update Appointment Date</label>
+        <input class="form-control" id="updateApptDate" name="updateApptDate" type="text" placeholder="MM/DD/YYY" required>
+      </div>
+      <div class="form-group">
+        <label for="updateApptTime">Update Appointment Time</label>
+        <input class="form-control" id="updateApptTime" name="updateApptTime" type="text" placeholder="9:00 AM" required>
       </div>
       <button type="submit" class="btn btn-default" id="updateBtn">Update</button>
     </form>

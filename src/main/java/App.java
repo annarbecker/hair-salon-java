@@ -39,7 +39,9 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       Stylist stylist = Stylist.find(Integer.parseInt(request.params(":id")));
       String clientName = request.queryParams("client");
-      Client newClient = new Client(clientName, stylist.getId());
+      String clientDate = request.queryParams("apptDate");
+      String clientTime = request.queryParams("apptTime");
+      Client newClient = new Client(clientName, stylist.getId(), clientDate, clientTime);
       newClient.save();
       model.put("stylist", stylist);
       model.put("clientList", stylist.getClients());

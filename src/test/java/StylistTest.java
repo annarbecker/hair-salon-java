@@ -38,9 +38,9 @@ public class StylistTest {
   public void getClients_returnsAllClientsFromDatabase_clientList() {
     Stylist myStylist = new Stylist("Jamie");
     myStylist.save();
-    Client firstClient = new Client("Jane", myStylist.getId());
+    Client firstClient = new Client("Jane", myStylist.getId(), "12/12/2016", "9:00 AM");
     firstClient.save();
-    Client secondClient = new Client("Sue", myStylist.getId());
+    Client secondClient = new Client("Sue", myStylist.getId(), "12/12/2016", "9:00 AM");
     secondClient.save();
     Client[] clientList = new Client[] {firstClient, secondClient};
     assertTrue(myStylist.getClients().containsAll(Arrays.asList(clientList)));
@@ -67,9 +67,9 @@ public class StylistTest {
   public void deleteClients_deletesClientsFromDBwhenTheirStylistIsDeleted() {
     Stylist myStylist = new Stylist("Jamie");
     myStylist.save();
-    Client firstClient = new Client("Sue", myStylist.getId());
+    Client firstClient = new Client("Sue", myStylist.getId(), "12/12/2016", "9:00 AM");
     firstClient.save();
-    Client secondClient = new Client("Jane", myStylist.getId());
+    Client secondClient = new Client("Jane", myStylist.getId(), "12/12/2016", "9:00 AM");
     secondClient.save();
     myStylist.deleteClients();
     myStylist.delete();

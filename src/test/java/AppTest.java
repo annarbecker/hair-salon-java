@@ -20,7 +20,7 @@ public class AppTest extends FluentTest {
   @Test
   public void rootTest() {
       goTo("http://localhost:4567/");
-      assertThat(pageSource()).contains("Hair Salon");
+      assertThat(pageSource()).contains("The Cutting Edge");
   }
 
   @Test
@@ -35,11 +35,11 @@ public class AppTest extends FluentTest {
   public void clientIsDisplayed() {
     Stylist myStylist = new Stylist("Jane");
     myStylist.save();
-    Client newClient = new Client("Anne", myStylist.getId());
+    Client newClient = new Client("Anne", myStylist.getId(), "12/12/2016", "9:00 AM");
     String stylistPath = String.format("http://localhost:4567/stylists/%d", myStylist.getId());
     newClient.save();
     goTo(stylistPath);
-    assertThat(pageSource().contains("Anne"));
+    assertThat(pageSource().contains("Anne 12/12/2016 9:00 AM"));
   }
 
   @Test
@@ -55,7 +55,7 @@ public class AppTest extends FluentTest {
   public void deleteClient() {
     Stylist myStylist = new Stylist("Jamie");
     myStylist.save();
-    Client myClient = new Client("Sue", myStylist.getId());
+    Client myClient = new Client("Sue", myStylist.getId(), "12/12/2016", "9:00 AM");
     String stylistPath = String.format("http://localhost:4567/stylists/%d", myStylist.getId());
     myClient.save();
     myClient.delete();
@@ -79,7 +79,7 @@ public class AppTest extends FluentTest {
   public void updateClient() {
     Stylist myStylist = new Stylist("Jamie");
     myStylist.save();
-    Client client = new Client("Sue", myStylist.getId());
+    Client client = new Client("Sue", myStylist.getId(), "12/12/2016", "9:00 AM");
     client.save();
     String clientPath = String.format("http://localhost:4567/add-clients/%d/update", client.getId());
     goTo(clientPath);
@@ -101,7 +101,7 @@ public class AppTest extends FluentTest {
   public void clientIsDeleted() {
     Stylist myStylist = new Stylist("Jamie");
     myStylist.save();
-    Client client = new Client("Sue", myStylist.getId());
+    Client client = new Client("Sue", myStylist.getId(), "12/12/2016", "9:00 AM");
     client.save();
     String clientPath = String.format("http://localhost:4567/add-clients/%d/delete", client.getId());
     goTo(clientPath);
@@ -121,7 +121,7 @@ public class AppTest extends FluentTest {
   public void clientIsUpdated() {
     Stylist myStylist = new Stylist("Jamie");
     myStylist.save();
-    Client client = new Client("Sue", myStylist.getId());
+    Client client = new Client("Sue", myStylist.getId(), "12/12/2016", "9:00 AM");
     client.save();
     String clientPath = String.format("http://localhost:4567/add-clients/%d/update", client.getId());
     goTo(clientPath);

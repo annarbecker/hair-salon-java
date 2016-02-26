@@ -4,9 +4,11 @@ import org.sql2o.*;
 public class Client {
   private String name;
   private int stylistId;
+  private String date;
+  private String time;
   private int id;
 
-  public Client(String name, int stylistId) {
+  public Client(String name, int stylistId, String date, String time) {
     this.name = name;
     this.stylistId = stylistId;
   }
@@ -23,9 +25,17 @@ public class Client {
     return id;
   }
 
+  public String getDate() {
+    return date;
+  }
+
+  public String getTime() {
+    return time;
+  }
+
   public static List<Client> all() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT id, name, stylistId FROM clients";
+      String sql = "SELECT id, name, stylistId, date, time FROM clients";
       return con.createQuery(sql).executeAndFetch(Client.class);
     }
   }
@@ -44,10 +54,12 @@ public class Client {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO clients (name, stylistId) VALUES (:name, :stylistId)";
+      String sql = "INSERT INTO clients (name, stylistId, date, time) VALUES (:name, :stylistId, :date, :time)";
       this.id = (int) con.createQuery(sql, true)
       .addParameter("name", this.name)
       .addParameter("stylistId", this.stylistId)
+      .addParameter("date", this.date)
+      .addParameter("time", this.time)
       .executeUpdate()
       .getKey();
     }
