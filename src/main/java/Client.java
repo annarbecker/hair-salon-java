@@ -24,8 +24,8 @@ public class Client {
   }
 
   public static List<Client> all() {
-    String sql = "SELECT id, name, stylistId FROM clients";
     try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT id, name, stylistId FROM clients";
       return con.createQuery(sql).executeAndFetch(Client.class);
     }
   }
@@ -82,7 +82,4 @@ public class Client {
       .executeUpdate();
     }
   }
-
-
-
 }
