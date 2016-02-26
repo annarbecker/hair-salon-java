@@ -26,6 +26,16 @@ public class ClientTest {
   }
 
   @Test
+  public void save_savesStylistIdForClientIntoDatabase_true() {
+    Stylist myStylist = new Stylist("Jane");
+    myStylist.save();
+    Client myClient = new Client("Anne", myStylist.getId());
+    myClient.save();
+    Client savedClient = Client.find(myClient.getId());
+    assertEquals(savedClient.getStylistId(), myStylist.getId());
+  }
+
+  @Test
   public void find_findsClientInDatabase_true() {
     Client myClient = new Client("Jane", 1);
     myClient.save();
@@ -50,15 +60,3 @@ public class ClientTest {
     assertEquals(0, Client.all().size());
   }
 }
-
-
-  // 
-  // @Test
-  // public void save_savesStylistIdIntoDB_true() {
-  //   Stylist myStylist = new Stylist("Jane");
-  //   myStylist.save();
-  //   Client myClient = new Client("Anne", myStylist.getId());
-  //   myClient.save();
-  //   Client savedClient = Client.find(myClient.getId());
-  //   assertEquals(savedClient.getStylistId(), myStylist.getId());
-  // }
