@@ -30,6 +30,17 @@ public class Client {
     }
   }
 
+  @Override
+  public boolean equals(Object otherClient) {
+    if(!(otherClient instanceof Client)) {
+      return false;
+    } else {
+      Client newClient = (Client) otherClient;
+      return this.getName().equals(newClient.getName()) &&
+      this.getId() == newClient.getId() &&
+      this.getStylistId() == newClient.getStylistId();
+    }
+  }
 
 
 
