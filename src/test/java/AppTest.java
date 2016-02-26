@@ -24,10 +24,21 @@ public class AppTest extends FluentTest {
   }
 
   @Test
-  public void stylistIsCreated() {
+  public void stylistIsCreatedAndDisplayed() {
     goTo("http://localhost:4567/");
     fill("#stylist").with("Jane");
     submit(".btn");
     assertThat(pageSource()).contains("Jane");
+  }
+
+  @Test
+  public void clientIsDisplayed() {
+    Stylist myStylist = new Stylist("Jane");
+    myStylist.save();
+    String stylistPath = String.format("http://localhost:4567/stylists/%d", myStylist.getId());
+    Client newClient = new Client("Anne", myStylist.getId());
+    newClient.save();
+    goTo(stylistPath);
+    assertThat(pageSource().contains("Anne"));
   }
 }
