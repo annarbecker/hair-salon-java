@@ -51,18 +51,18 @@ public class AppTest extends FluentTest {
       assertThat(!(pageSource()).contains("Jamie"));
     }
 
-    // @Test
-    // public void removeClientForm_removesClient() {
-    //   Stylist stylist = new Stylist("Grace", "Hopper");
-    //   stylist.save();
-    //   Client client = new Client("Richard", "Roe");
-    //   client.save();
-    //   client.assignStylist(stylist.getId());
-    //   goTo("http://localhost:4567/stylists/" +
-    //     Integer.toString(stylist.getId()));
-    //   click(".btn-link", withText("Remove Richard Roe"));
-    //   assertThat(!(pageSource()).contains("Roe, Richard"));
-    // }
+    @Test
+      public void deleteClient() {
+        Stylist myStylist = new Stylist("Jamie");
+        myStylist.save();
+        String stylistPath = String.format("http://localhost:4567/stylists/%d", myStylist.getId());
+        Client myClient = new Client("Sue", myStylist.getId());
+        myClient.save();
+        myClient.delete();
+        goTo(stylistPath);
+        submit(".delete");
+        assertThat(!(pageSource()).contains("Sue"));
+      }
     //
     // @Test
     // public void updateClientForm_ChangesName() {
