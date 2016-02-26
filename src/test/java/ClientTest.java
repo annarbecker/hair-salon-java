@@ -32,4 +32,13 @@ public class ClientTest {
     Client savedClient = Client.find(myClient.getId());
     assertTrue(myClient.equals(savedClient));
   }
+
+  @Test
+  public void update_updatesClientName() {
+    Client myClient = new Client("Jane", 1);
+    myClient.save();
+    String newName = "Sue";
+    myClient.update(newName);
+    assertTrue(Client.all().get(0).getName().equals(newName));
+  }
 }

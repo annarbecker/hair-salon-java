@@ -55,11 +55,22 @@ public class Client {
 
   public static Client find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM clients WHERE id=:id";
+      String sql = "SELECT * FROM clients WHERE id = :id";
       Client client = con.createQuery(sql)
       .addParameter("id", id)
       .executeAndFetchFirst(Client.class);
     return client;
+    }
+  }
+
+  public void update(String newName) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE clients SET name = :newName WHERE id = :id";
+      this.name = newName;
+      con.createQuery(sql)
+      .addParameter("newName", newName)
+      .addParameter("id", id)
+      .executeUpdate();
     }
   }
 
