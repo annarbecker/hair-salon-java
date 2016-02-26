@@ -6,5 +6,25 @@ import static spark.Spark.*;
 
 
 public class App {
-  public static void main(String[] args) {}
+  public static void main(String[] args) {
+    staticFileLocation("/public");
+    String layout = "templates/layout.vtl";
+
+    get("/", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("stylistList", Stylist.all());
+      model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/stylists", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      String stylistName = request.queryParams("stylist");
+      Stylist newStylist = new Stylist(stylistName);
+      newStylist.save();
+      model.put("stylistList", Stylist.all());
+      model.put("template", "templates/index.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
   }
+}

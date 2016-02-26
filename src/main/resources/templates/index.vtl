@@ -1,0 +1,21 @@
+<h1>Hair Salon</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>Add a Stylist</h3>
+    <form class="form-group" action="/stylists" method="post">
+      <label for="stylist">Stylist Name</label>
+      <input type="text" id="stylist" name="stylist" class="form-control" placeholder="enter stylist name">
+      <button type="submit" class="btn btn-default">Add Stylist</button>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <h3>Stylist List</h3>
+    <hr>
+    <ul>
+      #foreach($stylist in $stylistList)
+      <li>$stylist.getName()</li>
+      #end
+    </ul>
+  </div>
+</div>

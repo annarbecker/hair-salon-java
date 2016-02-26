@@ -20,6 +20,14 @@ public class AppTest extends FluentTest {
   @Test
   public void rootTest() {
       goTo("http://localhost:4567/");
-      assertThat(pageSource()).contains("");
+      assertThat(pageSource()).contains("Hair Salon");
+  }
+
+  @Test
+  public void stylistIsCreated() {
+    goTo("http://localhost:4567/");
+    fill("#stylist").with("Jane");
+    submit(".btn");
+    assertThat(pageSource()).contains("Jane");
   }
 }
